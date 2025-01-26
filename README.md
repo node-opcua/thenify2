@@ -1,4 +1,3 @@
-
 # thenify
 
 [![NPM version][npm-image]][npm-url]
@@ -30,6 +29,7 @@ Promisifies a function.
 
 - `options.withCallback` - support both callback and promise style, default to `false`.
 - `options.multiArgs` - change the behavior when callback have multiple arguments. default to `true`.
+
   - `true` - converts multiple arguments to an array
   - `false`- always use the first argument
   - `Array` - converts multiple arguments to an object with keys provided in `options.multiArgs`
@@ -37,21 +37,24 @@ Promisifies a function.
 - Turn async functions into promises
 
 ```js
-var thenify = require('thenify');
+var thenify = require('thenify')
 
 var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
-  callback(null, a, b, c);
-});
+  callback(null, a, b, c)
+})
 ```
 
 - Backward compatible with callback
 
 ```js
-var thenify = require('thenify');
+var thenify = require('thenify')
 
-var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
-  callback(null, a, b, c);
-}, { withCallback: true });
+var somethingAsync = thenify(
+  function somethingAsync(a, b, c, callback) {
+    callback(null, a, b, c)
+  },
+  { withCallback: true },
+)
 
 // somethingAsync(a, b, c).then(onFulfilled).catch(onRejected);
 // somethingAsync(a, b, c, function () {});
@@ -60,11 +63,11 @@ var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
 or use `thenify.withCallback()`
 
 ```js
-var thenify = require('thenify').withCallback;
+var thenify = require('thenify').withCallback
 
 var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
-  callback(null, a, b, c);
-});
+  callback(null, a, b, c)
+})
 
 // somethingAsync(a, b, c).then(onFulfilled).catch(onRejected);
 // somethingAsync(a, b, c, function () {});
@@ -73,11 +76,14 @@ var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
 - Always return the first argument in callback
 
 ```js
-var thenify = require('thenify');
+var thenify = require('thenify')
 
-var promise = thenify(function (callback) {
-  callback(null, 1, 2, 3);
-}, { multiArgs: false });
+var promise = thenify(
+  function (callback) {
+    callback(null, 1, 2, 3)
+  },
+  { multiArgs: false },
+)
 
 // promise().then(function onFulfilled(value) {
 //   assert.equal(value, 1);
@@ -87,11 +93,14 @@ var promise = thenify(function (callback) {
 - Converts callback arguments to an object
 
 ```js
-var thenify = require('thenify');
+var thenify = require('thenify')
 
-var promise = thenify(function (callback) {
-  callback(null, 1, 2, 3);
-}, { multiArgs: [ 'one', 'tow', 'three' ] });
+var promise = thenify(
+  function (callback) {
+    callback(null, 1, 2, 3)
+  },
+  { multiArgs: ['one', 'tow', 'three'] },
+)
 
 // promise().then(function onFulfilled(value) {
 //   assert.deepEqual(value, {
