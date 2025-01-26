@@ -1,7 +1,7 @@
 {
   "name": "thenify-ex",
   "description": "Promisify a callback-based function",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "authors": [
     "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)",
     "Etienne Rossignon <etienne.rossignon@sterfive.com>"
