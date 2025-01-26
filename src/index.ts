@@ -25,11 +25,11 @@ export function thenify(
  * Turn async functions into promises and backward compatible with callback
  */
 
-export function withCallback(fn: Function, options?: ICreateWrapperOptions) {
+export function withCallback<T extends Function>(fn: Function, options?: ICreateWrapperOptions): T {
   assert(typeof fn === 'function')
   options = options || {}
   options.withCallback = true
-  return createWrapper(fn, options)
+  return createWrapper(fn, options) as T;
 }
 
 function createCallback(

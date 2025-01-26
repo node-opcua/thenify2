@@ -60,7 +60,7 @@ var somethingAsync = thenify(
 // somethingAsync(a, b, c, function () {});
 ```
 
-or use `thenify.withCallback()`
+or use `withCallback()`
 
 ```js
 var thenify = require('thenify').withCallback

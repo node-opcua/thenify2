@@ -1,6 +1,6 @@
-const assert = require('assert')
+const should = require('should')
 
-const { thenify } = require('../src')
+const { thenify } = require('..')
 
 const setImmediate =
   global.setImmediate ||
@@ -21,8 +21,8 @@ describe('Promisify', function () {
     const prom = thenify(fn)
 
     prom().catch(function (err) {
-      assert.equal(err.message, 'boom')
-      assert.equal(err.boom, 'boom')
+      should.equal(err.message, 'boom')
+      should.equal(err.boom, 'boom')
       done()
     })
   })
@@ -37,7 +37,7 @@ describe('Promisify', function () {
     const prom = thenify(fn)
 
     prom(1, 2).catch(function (err) {
-      assert.equal(err.message, 'boom')
+      should.equal(err.message, 'boom')
       done()
     })
   })
@@ -56,7 +56,7 @@ describe('Promisify', function () {
     const prom = thenify(fn)
 
     prom().then(function (a) {
-      assert.equal(a, 1)
+      should.equal(a, 1)
       done()
     })
   })
