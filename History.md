@@ -1,3 +1,8 @@
+# 4.0.0 / 20245-01-26
+
+port to ESM /CommonJS dual module, use Typescript
+
+
 # 3.3.1 / 2020-06-18
 
 **fixes**

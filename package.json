@@ -15,10 +15,19 @@
   },
   "devDependencies": {
     "mocha": "11",
+    "tsup": "^8.3.6",
     "typescript": "5"
   },
-  "scripts": {
-    "build": "tsc",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+"scripts": {
+    "build": "tsup",
     "test": "mocha --reporter spec",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot",
     "ncu": "npx npm-check-updates -u",
@@ -30,8 +39,5 @@
     "thenify",
     "then",
     "es6"
-  ],
-  "files": [
-    "index.js"
   ]
 }

@@ -111,14 +111,14 @@ var promise = thenify(
 // });
 ```
 
+[github-action-image]: https://github.com/node-opcua/thenify2/actions/workflows/workflow/badge.svg
+[github-action-url]: https://github.com/node-opcua/thenify2/actions
 [gitter-image]: https://badges.gitter.im/thenables/thenify.png
 [gitter-url]: https://gitter.im/thenables/thenify
 [npm-image]: https://img.shields.io/npm/v/thenify.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/thenify
 [github-tag]: http://img.shields.io/github/tag/thenables/thenify.svg?style=flat-square
 [github-url]: https://github.com/thenables/thenify/tags
-[travis-image]: https://img.shields.io/travis/thenables/thenify.svg?style=flat-square
-[travis-url]: https://travis-ci.org/thenables/thenify
 [coveralls-image]: https://img.shields.io/coveralls/thenables/thenify.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/thenables/thenify
 [david-image]: http://img.shields.io/david/thenables/thenify.svg?style=flat-square

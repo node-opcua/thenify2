@@ -1,6 +1,6 @@
 const assert = require('assert')
 
-const { thenify, withCallback } = require('..')
+const { thenify, withCallback } = require('../src')
 
 it('fn.name', function () {
   function someCrazyName() {}

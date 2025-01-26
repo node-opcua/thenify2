@@ -1,6 +1,6 @@
 const assert = require('assert')
 
-const { thenify } = require('..')
+const { thenify } = require('../src')
 
 const setImmediate =
   global.setImmediate ||
