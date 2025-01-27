@@ -1,29 +1,28 @@
+const should = require('should')
 
-var assert = require('assert')
-
-var thenify = require('..')
+const { thenify, withCallback } = require('..')
 
 it('fn.name', function () {
   function someCrazyName() {}
 
-  assert.equal('someCrazyName', thenify(someCrazyName).name)
-  assert.equal('someCrazyName', thenify(someCrazyName).name)
+  should.equal('someCrazyName', thenify(someCrazyName).name)
+  should.equal('someCrazyName', thenify(someCrazyName).name)
   // In ES6 spec, functions can infer the name of an anonymous function from its syntactic position.
-  var noname = function () {}
-  var name = noname.name
+  const noname = function () {}
+  const name = noname.name
 
-  assert.equal(name, thenify(noname).name)
-  assert.equal(name, thenify.withCallback(noname).name)
+  should.equal(name, thenify(noname).name)
+  should.equal(name, withCallback(noname).name)
 })
 
 it('fn.name (bound function)', function () {
   function bound() {}
-  assert.equal('bound', thenify(bound).name)
-  assert.equal('bound', thenify.withCallback(bound).name)
+  should.equal('bound', thenify(bound).name)
+  should.equal('bound', withCallback(bound).name)
 
-  var noname = (function () {}).bind(this)
-  assert.equal('', thenify(noname).name)
-  assert.equal('', thenify.withCallback(noname).name)
+  const noname = function () {}.bind(this)
+  should.equal('', thenify(noname).name)
+  should.equal('', withCallback(noname).name)
 })
 
 it('fn(callback(err))', function () {
@@ -33,11 +32,13 @@ it('fn(callback(err))', function () {
     }, 0)
   }
 
-  return thenify(fn)().then(function () {
-    throw new Error('bang')
-  }).catch(function (err) {
-    assert.equal(err.message, 'boom')
-  })
+  return thenify(fn)()
+    .then(function () {
+      throw new Error('bang')
+    })
+    .catch(function (err) {
+      should.equal(err.message, 'boom')
+    })
 })
 
 it('fn(callback(null, value))', function () {
@@ -46,7 +47,7 @@ it('fn(callback(null, value))', function () {
   }
 
   return thenify(fn)().then(function (val) {
-    assert.equal(val, true)
+    should.equal(val, true)
   })
 })
 
@@ -56,7 +57,7 @@ it('fn(callback(null, values...))', function () {
   }
 
   return thenify(fn)().then(function (values) {
-    assert.deepEqual(values, [1, 2, 3])
+    should.deepEqual(values, [1, 2, 3])
   })
 })
 
@@ -66,7 +67,7 @@ it('fn(..args, callback())', function () {
   }
 
   return thenify(fn)(1, 2, 3).then(function (values) {
-    assert.deepEqual(values, [1, 2, 3])
+    should.deepEqual(values, [1, 2, 3])
   })
 })
 
@@ -74,10 +75,10 @@ it('unicode function name', function () {
   function 你好$hello_123(a, b, c, cb) {
     cb(null, a, b, c)
   }
-  var wrapper = thenify(你好$hello_123)
-  assert.equal(wrapper.name, '你好$hello_123')
+  const wrapper = thenify(你好$hello_123)
+  should.equal(wrapper.name, '你好$hello_123')
   wrapper(1, 2, 3).then(function (values) {
-    assert.deepEqual(values, [1, 2, 3])
+    should.deepEqual(values, [1, 2, 3])
   })
 })
 
@@ -87,9 +88,9 @@ it('invalid function name', function () {
   }
 
   Object.defineProperty(fn, 'name', { value: 'fake(){a.b;})();(function(){//' })
-  var wrapper = thenify(fn)
-  assert.equal(wrapper.name, fn.name)
+  const wrapper = thenify(fn)
+  should.equal(wrapper.name, fn.name)
   wrapper(1, 2, 3).then(function (values) {
-    assert.deepEqual(values, [1, 2, 3])
+    should.deepEqual(values, [1, 2, 3])
   })
 })

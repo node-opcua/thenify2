@@ -1,22 +1,46 @@
 {
-  "name": "thenify",
+  "name": "thenify-ex",
   "description": "Promisify a callback-based function",
-  "version": "3.3.1",
-  "author": "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)",
+  "version": "4.2.0",
+  "authors": [
+    "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)",
+    "Etienne Rossignon <etienne.rossignon@sterfive.com>"
+  ],
   "license": "MIT",
-  "repository": "thenables/thenify",
+  "repository": "node-opcua/thenify2",
   "dependencies": {
-    "any-promise": "^1.0.0"
+    "@types/assert": "^1.5.11",
+    "any-promise": "^1.3.0",
+    "assert": "^2.1.0"
   },
   "devDependencies": {
-    "bluebird": "^3.1.1",
-    "istanbul": "^0.4.0",
-    "mocha": "^3.0.2"
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.10",
+    "mocha": "11",
+    "should": "^13.2.3",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.3.6",
+    "typescript": "5"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
   },
   "scripts": {
+    "build": "npx tsup",
     "test": "mocha --reporter spec",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot",
-    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter dot"
+    "ncu": "npx npm-check-updates -u",
+    "release": "npx release-it"
   },
   "keywords": [
     "promisify",
@@ -24,8 +48,5 @@
     "thenify",
     "then",
     "es6"
-  ],
-  "files": [
-    "index.js"
   ]
 }

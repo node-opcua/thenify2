@@ -1,27 +1,28 @@
+const should = require('should')
 
-var assert = require('assert')
+const { thenify } = require('..')
 
-var promisify = require('..')
-
-var setImmediate = global.setImmediate || function (fn) {
-  process.nextTick(fn)
-}
+const setImmediate =
+  global.setImmediate ||
+  function (fn) {
+    process.nextTick(fn)
+  }
 
 describe('Promisify', function () {
   it('should reject errors', function (done) {
     function fn(done) {
       setImmediate(function () {
-        var err = new Error('boom')
+        const err = new Error('boom')
         err.boom = 'boom'
         done(err)
       })
     }
 
-    var prom = promisify(fn)
+    const prom = thenify(fn)
 
     prom().catch(function (err) {
-      assert.equal(err.message, 'boom')
-      assert.equal(err.boom, 'boom')
+      should.equal(err.message, 'boom')
+      should.equal(err.boom, 'boom')
       done()
     })
   })
@@ -33,18 +34,18 @@ describe('Promisify', function () {
       })
     }
 
-    var prom = promisify(fn)
+    const prom = thenify(fn)
 
     prom(1, 2).catch(function (err) {
-      assert.equal(err.message, 'boom')
+      should.equal(err.message, 'boom')
       done()
     })
   })
 
   /**
-  * bluebird can resolve multiple arguments,
-  * but v8 promises can't. -_-
-  */
+   * bluebird can resolve multiple arguments,
+   * but v8 promises can't. -_-
+   */
   it('should return the result', function (done) {
     function fn(done) {
       setImmediate(function () {
@@ -52,10 +53,10 @@ describe('Promisify', function () {
       })
     }
 
-    var prom = promisify(fn)
+    const prom = thenify(fn)
 
     prom().then(function (a) {
-      assert.equal(a, 1)
+      should.equal(a, 1)
       done()
     })
   })

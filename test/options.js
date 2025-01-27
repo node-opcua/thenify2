@@ -1,11 +1,12 @@
+const should = require('should')
 
-var assert = require('assert')
+const { thenify } = require('..')
 
-var promisify = require('..')
-
-var setImmediate = global.setImmediate || function (fn) {
-  process.nextTick(fn)
-}
+const setImmediate =
+  global.setImmediate ||
+  function (fn) {
+    process.nextTick(fn)
+  }
 
 describe('options', function () {
   describe('.withCallback', function () {
@@ -14,14 +15,14 @@ describe('options', function () {
     }
 
     it('promise', function () {
-      return promisify(fn, { withCallback: true })().then(function (val) {
-        assert.equal(val, true)
+      return thenify(fn, { withCallback: true })().then((val) => {
+        should.equal(val, true)
       })
     })
 
     it('callback', function (done) {
-      return promisify(fn, { withCallback: true })(function (err, val) {
-        assert.equal(val, true)
+      return thenify(fn, { withCallback: true })((err, val) => {
+        should.equal(val, true)
         done()
       })
     })
@@ -33,25 +34,27 @@ describe('options', function () {
     }
 
     it('default to true', function () {
-      return promisify(fn)().then(function (values) {
-        assert.deepEqual(values, [1, 2, 3])
+      return thenify(fn)().then(function (values) {
+        should.deepEqual(values, [1, 2, 3])
       })
     })
 
     it('set to false', function () {
-      return promisify(fn, { multiArgs: false })().then(function (value) {
-        assert.equal(value, 1)
+      return thenify(fn, { multiArgs: false })().then(function (value) {
+        should.equal(value, 1)
       })
     })
 
     it('set to array', function () {
-      return promisify(fn, { multiArgs: [ 'one', 'tow', 'three' ] })().then(function (value) {
-        assert.deepEqual(value, {
-          one: 1,
-          tow: 2,
-          three: 3
-        })
-      })
+      return thenify(fn, { multiArgs: ['one', 'tow', 'three'] })().then(
+        function (value) {
+          should.deepEqual(value, {
+            one: 1,
+            tow: 2,
+            three: 3,
+          })
+        },
+      )
     })
   })
 })

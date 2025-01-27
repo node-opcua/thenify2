@@ -11,7 +11,7 @@ describe('with callback backward compatible', function () {
     })
 
     it('should set name to empty', function () {
-      assert.equal('', promisify(function() {}).name)
+      assert.equal('', promisify(function () {}).name)
     })
   })
 
@@ -23,11 +23,13 @@ describe('with callback backward compatible', function () {
     }
 
     it('promise', function () {
-      return promisify(fn)().then(function () {
-        throw new Error('bang')
-      }).catch(function (err) {
-        assert.equal(err.message, 'boom')
-      })
+      return promisify(fn)()
+        .then(function () {
+          throw new Error('bang')
+        })
+        .catch(function (err) {
+          assert.equal(err.message, 'boom')
+        })
     })
 
     it('callback', function (done) {
