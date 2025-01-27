@@ -27,16 +27,16 @@
     "src"
   ],
   "types": "./dist/index.d.ts",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.js"
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "npx tsup",
     "test": "mocha --reporter spec",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot",
     "ncu": "npx npm-check-updates -u",
