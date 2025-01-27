@@ -1,9 +1,12 @@
-# thenify
+# thenify-ex
+
+A  fork of [thenify](thenify-url) to support modern CJS/ESM modules with typescript support.
+
+
 
 [![NPM version][npm-image]][npm-url]
-[![Build status][travis-image]][travis-url]
+[![Build status][github-action-image]][github-action-url]
 [![Test coverage][coveralls-image]][coveralls-url]
-[![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
@@ -21,6 +24,7 @@ An added benefit is that `throw`n errors in that async function will be caught b
 
 ### fn = thenify(fn, options)
 
+
 Promisifies a function.
 
 ### Options
@@ -36,10 +40,11 @@ Promisifies a function.
 
 - Turn async functions into promises
 
-```js
-var thenify = require('thenify')
 
-var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
+```js
+import { thenify } from 'thenify';
+
+const  somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
   callback(null, a, b, c)
 })
 ```
@@ -47,9 +52,9 @@ var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
 - Backward compatible with callback
 
 ```js
-var thenify = require('thenify')
+import { thenify } from 'thenify';
 
-var somethingAsync = thenify(
+const somethingAsync = thenify(
   function somethingAsync(a, b, c, callback) {
     callback(null, a, b, c)
   },
@@ -63,9 +68,9 @@ var somethingAsync = thenify(
 or use `withCallback()`
 
 ```js
-var thenify = require('thenify').withCallback
+import { withCallback}  from "thenify";
 
-var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
+var somethingAsync = withCallback(function somethingAsync(a, b, c, callback) {
   callback(null, a, b, c)
 })
 
@@ -76,7 +81,7 @@ var somethingAsync = thenify(function somethingAsync(a, b, c, callback) {
 - Always return the first argument in callback
 
 ```js
-var thenify = require('thenify')
+import { thenify}  from "thenify";
 
 var promise = thenify(
   function (callback) {
@@ -93,7 +98,7 @@ var promise = thenify(
 - Converts callback arguments to an object
 
 ```js
-var thenify = require('thenify')
+import { thenify}  from "thenify";
 
 var promise = thenify(
   function (callback) {
@@ -111,7 +116,7 @@ var promise = thenify(
 // });
 ```
 
-[github-action-image]: https://github.com/node-opcua/thenify2/actions/workflows/workflow/badge.svg
+[github-action-image]: https://github.com/node-opcua/thenify2/actions/workflows/workflow.yaml/badge.svg
 [github-action-url]: https://github.com/node-opcua/thenify2/actions
 [gitter-image]: https://badges.gitter.im/thenables/thenify.png
 [gitter-url]: https://gitter.im/thenables/thenify
@@ -125,5 +130,5 @@ var promise = thenify(
 [david-url]: https://david-dm.org/thenables/thenify
 [license-image]: http://img.shields.io/npm/l/thenify.svg?style=flat-square
 [license-url]: LICENSE
-[downloads-image]: http://img.shields.io/npm/dm/thenify.svg?style=flat-square
-[downloads-url]: https://npmjs.org/package/thenify
+[downloads-image]: http://img.shields.io/npm/dm/thenify-ex.svg?style=flat-square
+[downloads-url]: https://npmjs.org/package/thenify-ex
