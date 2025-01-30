@@ -35,7 +35,7 @@
     "test": "mocha --reporter spec",
     "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot",
     "ncu": "npx npm-check-updates -u",
-    "release": "npx release-it"
+    "release-it": "npm run build && npx release-it"
   },
   "keywords": [
     "promisify",
