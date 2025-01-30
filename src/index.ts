@@ -1,6 +1,3 @@
-import Promise from 'any-promise'
-import assert from 'assert'
-
 export interface ICreateWrapperOptions {
   withCallback?: boolean
   multiArgs?: boolean | string[]
@@ -17,7 +14,7 @@ export function thenify(
   fn: Function,
   options: ICreateWrapperOptions,
 ): Function {
-  assert(typeof fn === 'function')
+  if (!(typeof fn === 'function')) throw new Error("expect `fn` to be a function");
   return createWrapper(fn, options)
 }
 
@@ -26,7 +23,7 @@ export function thenify(
  */
 
 export function withCallback<T extends Function>(fn: Function, options?: ICreateWrapperOptions): T {
-  assert(typeof fn === 'function')
+  if (!(typeof fn === 'function')) throw new Error("expect `fn` to be a function");
   options = options || {}
   options.withCallback = true
   return createWrapper(fn, options) as T;
